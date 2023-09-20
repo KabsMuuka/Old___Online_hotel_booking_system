@@ -24,6 +24,8 @@ app.set('view engine','ejs');
 //routes
 app.use('/api/data',routes);
 
+//get all students
+app.use('/api/fetch',routes);
 //create users
 app.use('/userlog',routes);
 

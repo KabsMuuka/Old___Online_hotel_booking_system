@@ -2,12 +2,36 @@ const pool = require('../db/database');
 const nodemailer = require('nodemailer')
 let customer = require('../Model/customer');
 
-// const getAllStudents = (req,res) =>{
-//     pool.query(`SELECT * FROM user_table`,(error,result)=>{
-//     if (error) throw error;
-//     res.status(200).json(result.rows);
-//    });
-// };
+const getAllStudents = (req,res) =>{
+    pool.query(`SELECT * FROM customers`,(error,result)=>{
+    if (error) throw error;
+    res.status(200).json(result.rows);
+   });
+};
+
+
+const User = async(req,res) =>{
+    const { firstName,lastName,email,gender,nationality,phoneNumber } = req.body;
+    const insertQuery = ` 
+    INSERT INTO customers(firstName,lastName,email,gender,nationality,phoneNumber)
+    VALUES($1, $2, $3,$4, $5, $6)
+    `
+    try {
+        const result = await pool.query(insertQuery,[firstName,lastName,email,gender,nationality,phoneNumber]);
+        console.log(`successfully inserted data ${result}`);
+    } catch (error) {
+        console.log('failed to save data into database');
+    }
+}
+
+
+
+
+
+
+
+
+
 
 //mongoose
 
@@ -20,8 +44,9 @@ const mailTransporter = nodemailer.createTransport({
 })
 
 const getinfor = async(req,res)=> {
-    const customers = await customer.find();
+   
     try {
+        const customers = await customer.find();
         for (customer in customers) {
             const emailData = {
                 from: 'kipmoore315@gmail.com',
@@ -39,16 +64,16 @@ const getinfor = async(req,res)=> {
 };
 
 
-const User = async(req,res)=>{
-    try {
-        const user = new customer(req.body);
-        await user.save();
-        console.log('User infor saved in database')
+// const User = async(req,res)=>{
+//     try {
+//         const user = new customer(req.body);
+//         await user.save();
+//         console.log('User infor saved in database')
      
-    } catch (error) {
-        res.status(400).json({message: error.message})
-    }
-}
+//     } catch (error) {
+//         res.status(400).json({message: error.message})
+//     }
+// }
 const login = (req,res)=>{
     try {
         //rendering index.ejs to webpage
@@ -102,5 +127,6 @@ module.exports ={
     reserve,
     admin,
     getinfor,
-    User
+    User,
+    getAllStudents
 }

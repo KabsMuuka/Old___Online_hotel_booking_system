@@ -1,11 +1,12 @@
 const express = require('express');
 const route = express.Router();
 
-const {Index,login,signup,reserve,User,admin,getinfor} = require('../ModelControl/control')
+const {Index,login,signup,reserve,User,admin,getinfor,getAllStudents} = require('../ModelControl/control')
 
 
 //database routes
 route.post('/',User);
+route.get('/',getAllStudents);
 route.get('/',getinfor);
 //database routes
 //EJS render
