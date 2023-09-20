@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Admin panel</h1>
+    <form  id="dataForm" method="POST">
+
+        <div class="container"> 
+
+                <div class="rows"> 
+                    <label for="">bookingID</label>
+                    <input type="text" id="data" placeholder="bookingID">
+                </div>
+
+                <div class="row"> 
+                    <label for="">CheckInDate</label>
+                    <input type="date" id="data" placeholder="date">
+                </div>
+
+
+                <div class="row"> 
+                    <label for="">CheckOutDate</label>
+                    <input type="date" id="data" placeholder="date">
+                </div>
+
+                <div class="row"> 
+                    <label for="">price</label>
+                    <input type="text" id="data" placeholder="price">
+                </div>
+
+                <div class="row"> 
+                    <label for="">status</label>
+                    <input type="text" id="data" placeholder="status">
+                </div>
+
+                <div class="row"> 
+                    <label for="">CustomerID</label>
+                    <input type="text" id="data" placeholder="CustomerID">
+                </div>
+
+                <div class="row"> 
+                    <label for="">roomID</label>
+                    <input type="text" id="data" placeholder="roomID">
+                </div>
+
+                <div class="row"> 
+                    <label for="">hotelID</label>
+                    <input type="text" id="data" placeholder="hotelID">
+                </div>
+
+                <div> 
+                 <button id="submit"> submit </button>
+                </div>
+        </div>
+    </form>
+    <script>
+document.getElementById('dataForm').addEventListener('submit',(event)=>{
+    event.preventDefault();
+    const data = document.getElementById('data').value;
+
+    fetch("/api/data",{
+        method:'POST',
+        headers: {
+            'Content-type': 'application/json' 
+        },
+        body: JSON.stringify({ data })
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result.message);
+    })
+    .catch(error => console.log(error))
+}); 
+    </script>
+</body>
+</html>
+</html>

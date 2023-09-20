@@ -1,0 +1,121 @@
+/* Reset default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0; /* A lighter background color */
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px; /* Increase font size for headings */
+    margin-top: 20px;
+    color: #333; /* Darker text color */
+}
+
+.images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 images in a row */
+    gap: 20px; /* Add some spacing between images */
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.images img {
+    max-width: 100%; /* Ensure images fit within their containers */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    transition: transform 0.3s ease; /* Add a subtle zoom effect on hover */
+}
+
+.images img:hover {
+    transform: scale(1.05); /* Slightly enlarge image on hover */
+}
+
+a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: tomato;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Add hover effect on links */
+}
+
+a:hover {
+    background-color: #ff6347; /* Darken the background color on hover */
+}
+
+
+
+/* Styles for the image viewer (modal) container */
+#imageViewer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    z-index: 999;
+}
+
+#imageViewerContent {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+#closeViewer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: tomato;
+    font-size: 24px;
+}
+
+
+#imageViewer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    z-index: 999;
+}
+
+#imageViewerContent {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+#closeViewer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: tomato;
+    font-size: 24px;
+}

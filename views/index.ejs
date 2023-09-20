@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Explore Rooms</h1>
+        <div class="images"> 
+            <div>
+                <img src="/images/img1.jpg" id="img1" alt="loading" width="500">
+            </div>
+            <div>
+                <img src="/images/img2.jpg" id="img2" alt="loading" width="500">  
+            </div>
+            <div>
+                <img src="/images/img3.jpg" id="img3" alt="loading" width="500"> 
+            </div>
+        </div>
+        <a href="./reserve">Reserved rooms</a>
+        <a href="./admin">Admin</a>
+    </div>
+
+    <!-- Image viewer (modal) container -->
+    <div id="imageViewer">
+        <div id="imageViewerContent">
+            <span id="closeViewer">X</span>
+            <span id="markPicker"> pick </span>
+            <!-- Display image and descriptions here -->
+            <img id="viewImage" width="300">
+            <p id="roomNumber"></p>
+            <p id="roomDescription"></p>
+            <p id="roomPrice"></p>
+        </div>
+    </div>
+
+    <script>
+        let viewImage = document.getElementById('viewImage');
+        let roomNumber = document.getElementById('roomNumber');
+        let roomDescription = document.getElementById('roomDescription');
+        let roomPrice = document.getElementById('roomPrice');
+
+
+        function openImage(imageSrc, number, description, price){
+            const imageViewer = document.getElementById('imageViewer');
+            viewImage.src = imageSrc;
+            roomNumber.textContent = `Room number: ${number}`;
+            roomDescription.textContent = `Description: ${description}`;
+            roomPrice.textContent = `Price: ${price}`;
+            imageViewer.style.display = 'block';
+        }
+
+        
+        function markPick(){
+            //when the user clicks pick, the image should move to reserved room!
+        }
+
+        
+        // Function to close the image viewer (modal)
+        function closeImageViewer() {
+            const imageViewer = document.getElementById('imageViewer');
+            imageViewer.style.display = 'none';
+        }
+
+
+        // Attach click event listeners to each image
+        const img1 = document.getElementById('img1');
+        const img2 = document.getElementById('img2');
+        const img3 = document.getElementById('img3');
+
+        img1.addEventListener('click', () => openImage(img1.src, '23', 'Fair lighting with a beautiful view of the city', 'k400 per Night'));
+        img2.addEventListener('click', () => openImage(img2.src, '43', 'Dark room amazing for relaxing', 'k600 per Night'));
+        img3.addEventListener('click', () => openImage(img3.src, '66', 'Morning sunlights with a beautiful view of the ocean', 'k500 per Night'));
+
+        const closeViewer = document.getElementById('closeViewer');
+        closeViewer.addEventListener('click', closeImageViewer);
+
+        const markPicker = document.getElementById('markPicker');
+        markPicker.addEventListener('click',markPick);
+
+    </script>
+</body>
+</html>
