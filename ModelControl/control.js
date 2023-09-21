@@ -10,7 +10,6 @@ const pool = new Pool({
 //imports
 const nodemailer = require('nodemailer')
 
-
 const getAllStudents = (req,res) =>{
     try {
         pool.query(`SELECT * FROM customers`,(error,result)=>{

@@ -1,0 +1,17 @@
+h1{
+    text-align: center;
+    font-size: medium;
+}
+body{
+    background-color: lightgray;
+}
+.image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.link{
+    color: rgb(155, 143, 155);
+}
