@@ -20,13 +20,14 @@ app.listen(port,(req,res)=>{
 })
 //views 
 app.set('view engine','ejs');
-//routes
 
+//routes
 //get all students
+app.use('/register',routes);
+
 app.use('/api/fetch',routes);
 //create users
-app.use('/userlog',routes);
-
+app.use('/register',routes);
 
 
 // app.use('/api/students',getAllStudents)

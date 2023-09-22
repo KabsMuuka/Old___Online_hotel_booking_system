@@ -1,3 +1,5 @@
+// bcrypt encrypts passwords into hashpasswords
+const bcrypt = require('bcrypt');
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -9,6 +11,30 @@ const pool = new Pool({
 });
 //imports
 const nodemailer = require('nodemailer')
+
+const register = async (req,res) =>{
+    const {username,email,password} = req.body;
+    const insertQuery = `
+   INSERT INTO register(username,email,password)
+   VALUES($1, $2, $3);
+   `
+   try {
+    //encrypt the password 
+    const hashedPassword = await bcrypt.hash(password,10);
+
+    //adding the encrypted password into the database
+    await pool.query(insertQuery,[username,email,hashedPassword]);
+    console.log('successfully added user info, into the database')
+    res.status(200).json({ message: 'Registration successful' });
+
+   } catch (error) {
+    console.log('Failed to insert user infor',error);
+    res.status(400).json({ message: 'Registration failed' });
+   }
+}
+
+
+
 
 const getAllStudents = (req,res) =>{
     try {
@@ -28,12 +54,19 @@ const User = async(req,res) =>{
     VALUES($1, $2, $3,$4, $5, $6)
     `
     try {
-        const result = await pool.query(insertQuery,[firstName,lastName,email,gender,nationality,phoneNumber]);
-        console.log(`successfully inserted data${result.rows}`);
+        await pool.query(insertQuery,[firstName,lastName,email,gender,nationality,phoneNumber]);
+        console.log(`successfully inserted data`);
+        res.status(200).json({ message: 'successful added customer infor' });
     } catch (error) {
         console.log('failed to save data into database',error);
     }
 }
+
+
+
+
+
+
 //rendering pages on webpage using EJS
 const login = (req,res)=>{
     try {
@@ -78,11 +111,17 @@ const reserve = (req,res)=>{
 }
 
 module.exports = {
+    //database
+    register,
+    User,
+    getAllStudents,
+
+
+    //renders
     Index,
     login,
     signup,
     reserve,
     admin,
-    User,
-    getAllStudents
+   
 }

@@ -2,43 +2,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="sign.css">
+    <link rel="stylesheet" href="signUp.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <h1>Sign Up</h1>
-    <form action="/userlog" method="POST">
+    <h1>Register</h1>
+    <form action="/register" method="POST">
+
         <div class="container"> 
+
             <div class="row"> 
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                <label for="username">Username</label>
+                <input type="text" id="firstName" name="username" placeholder="username" required>
             </div>
 
             <div class="row"> 
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                <label for="email">email</label>
+                <input type="text" id="email" name="email" placeholder="email" required>
             </div>
 
             <div class="row"> 
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Email" required>
-            </div>
-
-            <div class="row"> 
-                <label for="gender">Gender</label>
-                <input type="text" id="gender" name="gender" placeholder="Gender" required>
-            </div>
-
-            <div class="row"> 
-                <label for="nationality">Nationality</label>
-                <input type="text" id="nationality" name="nationality" placeholder="Nationality" required>
-            </div>
-
-            <div class="row"> 
-                <label for="phoneNumber">Phone Number</label>
-                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required>
+                <label for="password">password</label>
+                <input type="password" id="password" name="password" placeholder="password" required>
             </div>
 
             <div> 

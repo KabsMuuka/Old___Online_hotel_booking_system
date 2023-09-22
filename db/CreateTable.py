@@ -50,7 +50,14 @@ create_table_query = """
     FOREIGN KEY (roomID) REFERENCES roomtype(roomID)
     )
 """
-
+create_table_query = """
+    CREATE TABLE register(
+    userID SERIAL PRIMARY KEY,
+    username varchar(255) NOT NULL, 
+    email varchar(255) NOT NULL,
+    password varchar(255) NOT NULL
+    )
+"""
 cursor.execute(create_table_query) 
 connection.commit()
 

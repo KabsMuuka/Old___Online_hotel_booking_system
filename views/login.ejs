@@ -2,25 +2,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <link rel="stylesheet" href="signUp.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <h1>login</h1>
-    <form action="">
-        <div> 
-            <label for="">username</label>
-            <input type="text" placeholder="username">
-            <div>
-                <div> 
-                    <label for="">password</label>
-                    <input type="text" placeholder="username">
-                    <input type="submit">
-                </div>
-                <div> 
-                    <a href="./signup">signUp</a>
-                </div>
+    <h1>Login</h1>
+    <form action="/logins" method="POST">
+        <div class="container"> 
+
+            <div class="row"> 
+                <label for="username">Username</label>
+                <input type="text" id="firstName" name="username" placeholder="username" required>
+            </div>
+
+            <div class="row"> 
+                <label for="password">password</label>
+                <input type="password" id="password" name="password" placeholder="password" required>
+            </div>
+
+            <div> 
+                <button type="submit">Submit</button>
             </div>
         </div>
     </form>

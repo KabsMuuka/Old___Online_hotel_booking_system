@@ -51,5 +51,5 @@ function Pick(imageId) {
     buttons.forEach(button => {
         button.disabled = true;
     });
-    alert(`image picked`)
+    alert(`room picked`)
 }
