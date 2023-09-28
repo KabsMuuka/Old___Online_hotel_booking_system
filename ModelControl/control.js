@@ -1,6 +1,7 @@
 // bcrypt encrypts passwords into hashpasswords
 const bcrypt = require('bcrypt');
 
+
 const { Pool } = require('pg');
 const pool = new Pool({
     host: 'localhost',
@@ -12,12 +13,19 @@ const pool = new Pool({
 //imports
 const nodemailer = require('nodemailer')
 
-const register = async (req,res) =>{
+const register =  async(req,res) =>{
     const {username,email,password} = req.body;
+    //check if the email already exist
+    const result = await pool.query(`SELECT email FROM register WHERE email = $1`,[email]);
+    //checks if theres any matching email
+    if(result.rows.length > 0){
+        res.status(403).json('Email already in use');
+
+    }else{
+
     const insertQuery = `
-   INSERT INTO register(username,email,password)
-   VALUES($1, $2, $3);
-   `
+     INSERT INTO register(username,email,password)
+     VALUES($1, $2, $3); `
    try {
     //encrypt the password 
     const hashedPassword = await bcrypt.hash(password,10);
@@ -29,16 +37,18 @@ const register = async (req,res) =>{
 
    } catch (error) {
     console.log('Failed to insert user infor',error);
-    res.status(400).json({ message: 'Registration failed' });
-   }
+    res.status(400).json({ message: `Registration failed}`});
+    }
+ }
 }
 
+const logins = (req,res) =>{
 
 
-
-const getAllStudents = (req,res) =>{
+}
+const getAllUsers = (req,res) =>{
     try {
-        pool.query(`SELECT * FROM customers`,(error,result)=>{
+        pool.query(`SELECT * FROM register`,(error,result)=>{
         if (error) throw error;
         res.status(200).json(result.rows);
         });
@@ -61,9 +71,6 @@ const User = async(req,res) =>{
         console.log('failed to save data into database',error);
     }
 }
-
-
-
 
 
 
@@ -114,7 +121,7 @@ module.exports = {
     //database
     register,
     User,
-    getAllStudents,
+    getAllUsers,
 
 
     //renders
@@ -123,5 +130,6 @@ module.exports = {
     signup,
     reserve,
     admin,
+    
    
 }

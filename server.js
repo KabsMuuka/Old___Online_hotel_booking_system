@@ -1,8 +1,17 @@
+// if (process.env.NODE_ENV !== 'production'){
+//     require('dotenv').config();
+// }
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path')
 const routes = require('./ModelRoutes/routes');
+
+const flash = require('express-flash');
+const session = require('express-session');
+
+
 const {Index,login,reserve,signup,admin} = require('./ModelControl/control');
+
 //nodemailer transporter
 
 const app = express();
@@ -15,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //connecting to db
 
 const port = 3000;
+
 app.listen(port,(req,res)=>{
     console.log(`running on port ${port}`)
 })
@@ -22,13 +32,13 @@ app.listen(port,(req,res)=>{
 app.set('view engine','ejs');
 
 //routes
+
+
 //get all students
-app.use('/register',routes);
 
 app.use('/api/fetch',routes);
 //create users
 app.use('/register',routes);
-
 
 // app.use('/api/students',getAllStudents)
 
