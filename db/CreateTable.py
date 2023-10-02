@@ -58,6 +58,14 @@ create_table_query = """
     password varchar(255) NOT NULL
     )
 """
+
+create_table_query = """
+    CREATE TABLE admin(
+    email varchar(255) PRIMARY KEY NOT NULL, 
+    password varchar(255) NOT NULL
+    )
+"""
+
 cursor.execute(create_table_query) 
 connection.commit()
 

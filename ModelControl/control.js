@@ -1,15 +1,6 @@
 // bcrypt encrypts passwords into hashpasswords
 const bcrypt = require('bcrypt');
-
-
-const { Pool } = require('pg');
-const pool = new Pool({
-    host: 'localhost',
-    user: 'postgres',
-    port: "5432",
-    password: 'kabs',
-    database: 'HOTEL',
-});
+const pool = require('../db/hotelDB');
 //imports
 const nodemailer = require('nodemailer')
 
@@ -19,7 +10,7 @@ const register =  async(req,res) =>{
     const result = await pool.query(`SELECT email FROM register WHERE email = $1`,[email]);
     //checks if theres any matching email
     if(result.rows.length > 0){
-        res.status(403).json('Email already in use');
+        res.status(403).json(`Email already in Use: ${email}`);
 
     }else{
 
@@ -36,16 +27,27 @@ const register =  async(req,res) =>{
     res.status(200).json({ message: 'Registration successful' });
 
    } catch (error) {
-    console.log('Failed to insert user infor',error);
-    res.status(400).json({ message: `Registration failed}`});
+    res.status(500).json({ message: `Registration failed}`});
     }
  }
 }
 
-const logins = (req,res) =>{
+// const adminS = async(req,res)=>{
+//     const {email, password} = req.body;
 
+//     const insertQuery = `INSERT INTO admin(email, password)
+//     VALUES($1,$2);
+//     `
+//     try {
+//         const hashedPassword = await bcrypt.hash(password,10);
+//         await pool.query(insertQuery,[email,hashedPassword]);
+//         res.status(200).json({message:'Successfully added admin infor'})
+//         res.redirect('/login')
+//     } catch (error) {
+//         res.status(400).json({message: 'failed to add to admin'})
+//     }
+// }
 
-}
 const getAllUsers = (req,res) =>{
     try {
         pool.query(`SELECT * FROM register`,(error,result)=>{
@@ -56,6 +58,47 @@ const getAllUsers = (req,res) =>{
         res.status(400).json({message:error.message})
     }
 };
+
+const loging = async(req,res) =>{
+    const {email,password} = req.body;
+
+    const userResults = await pool.query(`SELECT email, password FROM register WHERE email=$1`,[email]);
+    if(userResults.rows.length === 0){
+        res.status(400).json('No user with that email exits');
+    }
+    const user = userResults.rows[0];
+    const passwordMatch = await bcrypt.compare(password,user.password);
+    // console.log('user pass',password);
+    // console.log('hashed pass',user.password);
+    
+    if(passwordMatch){
+        res.redirect('/index');
+    }else{
+       // req.flash('message', 'Incorrect password or email');
+        res.status(401).json({message: 'Incorrect password or email'});
+        res.redirect('/login');
+    }
+        // Now, render the 'login' template with the message
+       // res.render('login', { message: req.flash('message') });
+}
+
+
+const loginAsAdmin = async(req,res) =>{
+    const {email,password} = req.body;
+
+    const userResults = await pool.query(`SELECT email, password FROM admin WHERE email=$1`,[email]);
+    if(userResults.rows.length === 0){
+        res.status(400).json('No user with that email exits');
+    }
+    const user = userResults.rows[0];
+    const passwordMatch = await bcrypt.compare(password,user.password);
+  
+    if(passwordMatch){
+        res.redirect('/admin');
+    }else{
+        res.status(500).json({message: 'incorrect password or email'})
+    }
+}
 
 const User = async(req,res) =>{
     const { firstName,lastName,email,gender,nationality,phoneNumber } = req.body;
@@ -91,10 +134,29 @@ const admin = (req,res)=>{
         res.status(404).json({message:error.message})
     }
 }
+
 const signup = (req,res)=>{
     try {
         //rendering index.ejs to webpage
        res.render('signup')
+    } catch (error) {
+        res.status(404).json({message:error.message})
+    }
+}
+
+const adminLogin = (req,res)=>{
+    try {
+        //rendering index.ejs to webpage
+       res.render('adminLogin');
+    } catch (error) {
+        res.status(404).json({message:error.message})
+    }
+}
+
+const roomtype = (req,res)=>{
+    try {
+        //rendering index.ejs to webpage
+       res.render('roomtype');
     } catch (error) {
         res.status(404).json({message:error.message})
     }
@@ -116,20 +178,20 @@ const reserve = (req,res)=>{
         res.status(404).json({message:error.message})
     }
 }
-
 module.exports = {
     //database
+    loginAsAdmin,
     register,
     User,
     getAllUsers,
-
+    loging,
 
     //renders
     Index,
     login,
+    roomtype,
+    adminLogin,
     signup,
     reserve,
     admin,
-    
-   
 }

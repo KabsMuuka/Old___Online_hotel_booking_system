@@ -2,14 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="signUp.css">
+    <link rel="stylesheet" href="all.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>login</title>
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="/logins" method="POST">
-        <div class="container"> 
+
+    <a href="./signup"> SignUp </a>  <span> || </span>
+    <a href="./adminLogin"> Login as Admin </a> 
+    <hr>
+
+    <h1>Login</h1> 
+    <form action="/loging" method="POST">
+        <div class="container">
 
             <div class="row"> 
                 <label for="email">Email</label>
@@ -17,7 +22,7 @@
             </div>
 
             <div class="row"> 
-                <label for="password">password</label>
+                <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="password" required>
             </div>
 
@@ -25,7 +30,8 @@
                 <button type="submit">Submit</button>
             </div>
         </div>
-    </form>
-    
+    </form>    
+    <hr>
+
 </body>
 </html>

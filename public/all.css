@@ -1,10 +1,27 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #000000;
     margin: 0;
     padding: 0;
+    background-image: url('/images/l1.jpg');
+    background-size: cover;
 }
 
+a {
+    display: inline-block;
+    margin: 10px;
+    padding: 2px 2px;
+    text-decoration: none;
+    background-color: tomato;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Add hover effect on links */
+}
+
+a:hover {
+    background-color: #ff6347; /* Darken the background color on hover */
+}
 h1 {
     text-align: center;
     margin-top: 20px;
@@ -14,6 +31,7 @@ h1 {
     max-width: 400px;
     margin: 0 auto;
     background-color: #fff;
+    opacity: 0.7;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -33,6 +51,7 @@ input{
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    font-size: large;
 }
 
 button {

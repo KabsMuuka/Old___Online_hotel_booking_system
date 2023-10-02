@@ -50,6 +50,7 @@ function Pick(imageId) {
     const buttons = document.querySelectorAll('.pick-button');
     buttons.forEach(button => {
         button.disabled = true;
+        
     });
     alert(`room picked`)
 }

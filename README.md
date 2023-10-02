@@ -1,6 +1,8 @@
 # Online_hotel_booking_system 
-A customer can pick a room of choice and reserve it. 
+A customer can pick a room of choice and reserve it.
 
+Login page 
+<img src='./public/images/ss0.png'>
 Home page
 <img src='./public/images/ss1.png'>
 

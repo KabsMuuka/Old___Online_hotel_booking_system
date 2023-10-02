@@ -1,12 +1,13 @@
 const express = require('express');
 const route = express.Router();
 
-const {Index,login,signup,reserve,User,admin,getAllUsers,register} = require('../ModelControl/control')
-
+const {Index,login,signup,reserve,User,admin,getAllUsers,adminLogin,loginAsAdmin,loging,register,roomtype} = require('../ModelControl/control')
 
 //database routes
-// route.post('/',logins)
 route.post('/',register);
+route.post('/',loging);
+
+route.post('/',loginAsAdmin);
 
 route.post('/',User);
 route.get('/',getAllUsers);
@@ -20,6 +21,8 @@ route.get('/',login);
 route.get('/',signup);
 route.get('/',reserve);
 route.get('/',admin);
+route.get('/',adminLogin);
+route.get('/',roomtype);
 
 
 module.exports = route;
