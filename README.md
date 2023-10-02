@@ -4,9 +4,6 @@ A customer can pick a room of choice and reserve it.
 Login page 
 <img src='./public/images/ss0.png'>
 
-USERS in the database WITH HASHED passwords.
-<img src='./public/images/register.png'>
-
 Home page
 <img src='./public/images/ss1.png'>
 
